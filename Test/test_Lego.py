@@ -6,11 +6,16 @@ import pykka
 import json
 import os
 import time
+from Legobot.Lego import Lego
+import threading
+from Legobot.Message import *
+import pykka
 
 class TestLego(unittest.TestCase):
     def test_initialization(self):
         lock = threading.Lock()
         baseplate = Lego(None, lock)
+        lego = Lego(baseplate, baseplate.lock)
         lego = Lego(baseplate, baseplate.lock, 'lego.log')
         assert(baseplate.lock == lock)
         assert(lego.lock == lock)
